@@ -9,7 +9,11 @@ var sequential = {
   },
 
   search: function (cartaClicada, i) {
-      var cartaVirada = document.createElement('img');
+    var cartaVirada = document.createElement('img');
+
+    cartaVirada.setAttribute('src', ANIMATION.naipe[i][0]);
+    cartaVirada.setAttribute('class', 'card-padding card-size animated fadeIn');
+    ANIMATION.cartas.insertBefore(cartaVirada, cartaClicada);
 
       /* Se a carta escolhida for de número 2 e a busca for ordenada, cria a
       possiblidade desta carta não ser encontrada */
@@ -17,9 +21,6 @@ var sequential = {
               i = getRandomInt(0,2) === 0 ? i : i+1;
               ANIMATION.numCartas = 0;
       }
-      cartaVirada.setAttribute('src', ANIMATION.naipe[i][0]);
-      cartaVirada.setAttribute('class', 'card-padding card-size animated fadeIn');
-      ANIMATION.cartas.insertBefore(cartaVirada, cartaClicada);
 
       // Cria a possiblidade da carta não ser encontrada
       if (ANIMATION.naipe[i + 1][1] == ANIMATION.cenario[1]) {

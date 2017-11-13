@@ -38,7 +38,7 @@ var feedback = {
   },
 
   requiredForOrderedSearch: function() {
-    alert('Como a busca sequencial ordenada so envolve cartas númericas, só é' +
+    alert('Como a busca sequencial ordenada ou binária so envolve cartas númericas, só é' +
       ' permitido cartas no intervalo de 4 a 9 :/');
   },
 

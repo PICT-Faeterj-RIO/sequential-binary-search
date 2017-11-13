@@ -1,10 +1,12 @@
 /* NAMESPACE para variaveis globais */
 var ANIMATION = {
     cartas: document.querySelector('.cards'),
-    jsonObj: 'undefined',
+    jsonObj: cards,
     cenario: 'undefined',
     naipe: 'undefined',
     indiceIncremental: 0,
+    indiceBinaria: 0,
+    listenerCount: 0,
     numCartas: 0,
     ultimaCartaClicada: 'undefined'
 }
@@ -17,7 +19,7 @@ function exibirCartas(evt) {
     if (isNaN(ANIMATION.cenario[0]) || ANIMATION.cenario[0] < 4 || ANIMATION.cenario[0] > 13 ||
     ANIMATION.cenario[1] === '' || ANIMATION.cenario[2] === '' || ANIMATION.cenario[3] === '') {
         feedback.required();
-    } else if(ANIMATION.cenario[0] > 9 && ANIMATION.cenario[3] === 'sequencial-o') {
+    } else if(ANIMATION.cenario[0] > 9 && ANIMATION.cenario[3] !== 'sequencial-d') {
           feedback.requiredForOrderedSearch();
     } else {
         // Caso seja a primeira tentativa remove a imagem inicial
@@ -44,9 +46,17 @@ function criarCartas() {
         cartaOculta.setAttribute('class', 'card-padding flipInX animated');
         ANIMATION.cartas.appendChild(cartaOculta);
     }
-    setTimeout(function() {
-        ANIMATION.cartas.firstChild.setAttribute('class', 'card-padding animated pulse infinite');
-    }, 500);
+    if(ANIMATION.cenario[3] === 'binaria') {
+      var middle = ANIMATION.cartas.childNodes.length;
+      middle = Math.floor(middle/2);
+        setTimeout(function() {
+            ANIMATION.cartas.childNodes[middle].setAttribute('class', 'card-padding animated pulse infinite');
+        }, 500);
+    }else {
+      setTimeout(function() {
+          ANIMATION.cartas.firstChild.setAttribute('class', 'card-padding animated pulse infinite');
+      }, 500);
+    }
 }
 
 function iniciarPesquisa(evt) {
